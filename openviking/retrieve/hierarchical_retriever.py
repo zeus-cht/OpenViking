@@ -22,6 +22,7 @@ from openviking.storage import VikingDBInterface
 from openviking.storage.viking_fs import get_viking_fs
 from openviking.utils.config import RerankConfig
 from openviking.utils.logger import get_logger
+from openviking.utils.rerank import RerankClient
 
 logger = get_logger(__name__)
 
@@ -63,7 +64,7 @@ class HierarchicalRetriever:
         # Initialize rerank client only if config is available
         if rerank_config and rerank_config.is_available():
             # TODO: Support later - initialize RerankClient here
-            self._rerank_client = None
+            self._rerank_client = RerankClient.from_config(rerank_config)
             logger.info(
                 f"[HierarchicalRetriever] Rerank config available, threshold={self.threshold}"
             )
